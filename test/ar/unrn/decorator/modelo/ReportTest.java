@@ -12,7 +12,7 @@ public class ReportTest {
 	@Test
 	public void testFileNull() {
 		File file = null;
-		Report reporte = new Report("Reporte...");
+		DefaultReport reporte = new DefaultReport("Reporte...");
 		String expectedMessage = "File es NULL; no puedo exportar...";
 		assertTrue(assertThrows(IllegalArgumentException.class, () -> reporte.export(file)).getMessage()
 				.contains(expectedMessage));
@@ -23,7 +23,7 @@ public class ReportTest {
 	public void testExisteFile() {
 		String ruta = "/home/sebastian/archivo-reportes.txt";
 		File file = new File(ruta);
-		Report reporte = new Report("Reporte");
+		DefaultReport reporte = new DefaultReport("Reporte");
 		String expectedMessage = "El archivo ya existe...";
 		assertTrue(assertThrows(IllegalArgumentException.class, () -> reporte.export(file)).getMessage()
 				.contains(expectedMessage));
