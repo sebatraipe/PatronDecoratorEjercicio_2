@@ -15,6 +15,7 @@ public class DefaultReport implements Report {
 
 	@Override
 	public void export(File file) {
+
 		// Exportar el reporte a un archivo.
 		try {
 			FileWriter fw = new FileWriter(file);

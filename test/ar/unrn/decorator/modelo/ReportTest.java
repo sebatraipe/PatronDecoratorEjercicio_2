@@ -12,20 +12,25 @@ public class ReportTest {
 	@Test
 	public void testFileNull() {
 		File file = null;
-		DefaultReport reporte = new DefaultReport("Reporte...");
-		String expectedMessage = "File es NULL; no puedo exportar...";
-		assertTrue(assertThrows(IllegalArgumentException.class, () -> reporte.export(file)).getMessage()
+		Report report = new NoNullReport(new NoWriteOverReport(new DefaultReport("Reporte")));
+		String expectedMessage = "File is NULL; can't export.";
+		assertTrue(assertThrows(IllegalArgumentException.class, () -> report.export(file)).getMessage()
 				.contains(expectedMessage));
 
 	}
 
 	@Test
 	public void testExisteFile() {
-		String ruta = "/home/sebastian/archivo-reportes.txt";
+		String ruta = "/home/sebastian/decorator-reportes.txt";
 		File file = new File(ruta);
-		DefaultReport reporte = new DefaultReport("Reporte");
-		String expectedMessage = "El archivo ya existe...";
-		assertTrue(assertThrows(IllegalArgumentException.class, () -> reporte.export(file)).getMessage()
+		Report report = new NoNullReport(new NoWriteOverReport(new DefaultReport("Reporte")));
+		String expectedMessage = "File already exist...";
+		assertTrue(assertThrows(IllegalArgumentException.class, () -> report.export(file)).getMessage()
 				.contains(expectedMessage));
+	}
+
+	@Test
+	public void testSobreescribirFile() {
+
 	}
 }
